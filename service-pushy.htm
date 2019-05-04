@@ -1,0 +1,34 @@
+<html>
+<body>
+<script src="https://sdk.pushy.me/web/1.0.3/pushy-sdk.js"></script>
+<script>
+
+// Register device for push notifications
+Pushy.register({ appId: '5ccd9db55ad49ff30dba3faf' }).then(function (deviceToken) {
+    // Print device token to console
+    console.log('Pushy device token: ' + deviceToken);
+
+    // Send the token to your backend server via an HTTP GET request
+    //fetch('https://your.api.hostname/register/device?token=' + deviceToken);
+
+    // Succeeded, optionally do something to alert the user
+
+    if (Pushy.isRegistered()) {
+        // Subscribe the device to a topic
+        Pushy.subscribe('announcements').catch(function (err) {
+            // Handle subscription errors
+            console.error('Subscribe failed:', err);
+        });
+    }
+
+}).catch(function (err) {
+    // Handle registration errors
+    console.error(err);
+});
+
+</script>
+</head>
+<body>
+
+</body>
+</html>
